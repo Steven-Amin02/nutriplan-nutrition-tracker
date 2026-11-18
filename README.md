@@ -1,120 +1,76 @@
-# NutriPlan - JavaScript Starter Project
+# NutriPlan — Food, Nutrition & Fitness Planner
 
-Welcome to the NutriPlan starter project! The design is fully complete - your task is to bring it to life with JavaScript.
+A modern, responsive single-page web application built with **Vanilla JavaScript (ES6 Modules)** and **Tailwind CSS** to help users discover recipes, scan packaged food products, and track their daily and weekly nutrition intake.
 
-## 🎯 Project Overview
+---
 
-NutriPlan is a Food, Nutrition & Fitness Planner web application. The HTML and CSS are ready - you need to implement the JavaScript functionality.
+## ✨ Features
+
+### 🍽️ Meals & Recipes
+- **Browse & Search:** Explore recipes with live search by name, category filtering (Beef, Chicken, Dessert, Lamb, Pasta, Seafood, Vegan, Vegetarian, and more), and cuisine/area filters.
+- **Meal Details View:** Inspect full ingredient lists with measurements, step-by-step cooking instructions, embedded YouTube recipe videos, and estimated nutrition facts.
+- **Quick Logging:** Log any meal directly to your daily Food Log with one click.
+
+### 🛒 Product Scanner
+- **Name, Barcode & Category Lookup:** Search packaged food products by name, look up items by barcode, or browse by category.
+- **Nutri-Score & NOVA Badges:** View Nutri-Score grades (`A`–`E`), NOVA processing groups (`1`–`4`), and per-100g macro breakdowns (calories, protein, carbs, fat, sugar, fiber).
+- **Nutri-Score Filtering:** Filter displayed products by Nutri-Score grade and add items directly to your Food Log.
+
+### 📊 Food Log & Analytics
+- **Daily Macro Tracking:** Real-time progress bars comparing today's intake against daily goals (`2000 kcal`, `50g` protein, `250g` carbs, `65g` fat).
+- **7-Day Weekly Chart:** Interactive weekly nutrition visualization powered by **Plotly.js**.
+- **Persistent Storage:** All logged meals and products are saved locally in `localStorage` (`nutriplan_food_log`), with options to remove individual entries or clear today's log.
+
+### 📱 Responsive Navigation
+- Single-page multi-view navigation (**Meals & Recipes**, **Meal Details**, **Product Scanner**, **Food Log**) with a collapsible mobile sidebar and animated loading overlay.
+
+---
+
+## 🛠️ Tech Stack
+
+- **Core:** HTML5, CSS3, Vanilla JavaScript (ES6 Modules)
+- **Styling & Icons:** Tailwind CSS, Font Awesome 7, Google Fonts (`Inter`)
+- **Data Visualization & Alerts:** Plotly.js, SweetAlert2
+- **API:** NutriPlan API (`https://nutriplan-api.vercel.app/api`)
+- **Persistence:** Browser `localStorage`
+
+---
 
 ## 📁 Project Structure
 
-```
-starter/
-├── index.html          # Main HTML file (ready)
-├── README.md           # This file
+```text
+├── index.html
+├── README.md
 └── src/
     ├── css/
-    │   └── style.css   # Styles (ready)
+    │   ├── index.css
+    │   └── style.css
+    ├── images/
+    │   └── favicon.png
     └── js/
-        ├── main.js           # Entry point (implement here)
+        ├── main.js                      # App initialization & loading overlay
         ├── api/
-        │   └── mealdb.js     # API module (implement here)
-        ├── state/
-        │   └── appState.js   # State management (implement here)
+        │   ├── mealdb.js                # Meals, categories, areas & search API
+        │   └── openfoodfacts.js         # Product search, barcode & Nutri-Score helpers
+        ├── localstorage/
+        │   └── localstorage.js          # App state, goals & food log persistence
         └── ui/
-            └── components.js  # UI components (implement here)
+            ├── components.js            # Reusable UI card & state renderers
+            ├── foodlog.js               # Daily macro progress & Plotly weekly chart
+            ├── meals.js                 # Meals grid, filters & meal details view
+            ├── navigation.js            # SPA page switching & responsive sidebar
+            └── products.js              # Product scanner, barcode lookup & filtering
 ```
+
+---
 
 ## 🚀 Getting Started
 
-1. Open `index.html` in your browser to see the design
-2. Start implementing the JavaScript files
-3. Begin with `src/js/api/mealdb.js` - fetch data from the API
-4. Then update `src/js/main.js` to load and display data
+Because the project uses native **ES6 Modules** (`type="module"`), serve the root directory with a local HTTP server rather than opening `index.html` via `file://`:
 
-## 🔗 API Reference
+```bash
+# Using VS Code Live Server, or any static server such as:
+npx serve .
+```
 
-### TheMealDB API (Free, No API Key Required)
-
-Base URL: `https://www.themealdb.com/api/json/v1/1/`
-
-| Endpoint | Description | Example |
-|----------|-------------|---------|
-| `/categories.php` | Get all categories | [Try it](https://www.themealdb.com/api/json/v1/1/categories.php) |
-| `/search.php?s={query}` | Search meals by name | [Try it](https://www.themealdb.com/api/json/v1/1/search.php?s=chicken) |
-| `/lookup.php?i={id}` | Get meal by ID | [Try it](https://www.themealdb.com/api/json/v1/1/lookup.php?i=52772) |
-| `/filter.php?c={category}` | Filter by category | [Try it](https://www.themealdb.com/api/json/v1/1/filter.php?c=Seafood) |
-| `/filter.php?a={area}` | Filter by area/cuisine | [Try it](https://www.themealdb.com/api/json/v1/1/filter.php?a=Italian) |
-| `/random.php` | Get random meal | [Try it](https://www.themealdb.com/api/json/v1/1/random.php) |
-
-## ✅ Tasks to Complete
-
-### Level 1: Basic Functionality
-- [ ] Fetch and display meal categories in `#categories-grid`
-- [ ] Fetch and display recipes in `#recipes-grid`
-- [ ] Hide the loading overlay when data is loaded
-- [ ] Update the recipe count text
-
-### Level 2: Interactivity
-- [ ] Implement search functionality (use `#search-input`)
-- [ ] Filter recipes when clicking on a category
-- [ ] Show meal details when clicking on a recipe card
-
-### Level 3: Navigation
-- [ ] Implement sidebar navigation between pages
-- [ ] Create different views (Meals, Products, Food Log)
-
-### Level 4: Advanced Features
-- [ ] Add loading states while fetching data
-- [ ] Implement error handling for API calls
-- [ ] Save favorites to localStorage
-
-## 🎨 Key HTML Elements
-
-### Meals Page
-| Element ID | Purpose |
-|------------|---------|
-| `#app-loading-overlay` | Loading screen (hide when ready) |
-| `#categories-grid` | Container for category cards |
-| `#recipes-grid` | Container for recipe cards |
-| `#search-input` | Search input field |
-| `#recipes-count` | Text showing recipe count |
-
-### Product Scanner Page
-| Element ID | Purpose |
-|------------|---------|
-| `#products-section` | Product scanner page container (toggle display) |
-| `#product-search-input` | Product name search input |
-| `#barcode-input` | Barcode number input |
-| `#search-product-btn` | Product search button |
-| `#lookup-barcode-btn` | Barcode lookup button |
-| `#products-grid` | Container for product cards |
-| `#products-count` | Text showing products count |
-| `.nutri-score-filter` | Nutri-Score filter buttons |
-
-### Food Log Page
-| Element ID | Purpose |
-|------------|---------|
-| `#foodlog-section` | Food log page container (toggle display) |
-| `#foodlog-date` | Current date display |
-| `#foodlog-today-section` | Today's nutrition summary |
-| `#logged-items-list` | Container for logged food items |
-| `#weekly-chart` | Weekly chart container (Plotly) |
-| `#clear-foodlog` | Clear all logged items button |
-| `.quick-log-btn` | Quick action buttons |
-
-## 💡 Tips
-
-1. **Start Simple**: First just fetch and log data to console
-2. **Use Modules**: The project uses ES6 modules (`type="module"`)
-3. **Check Console**: Look for TODO messages and errors
-4. **Inspect Design**: The skeleton loaders show the expected card layout
-5. **Navigation**: Use `style.display = "none"` or `style.display = ""` to show/hide sections
-6. **Page State**: Track current page in your app state for navigation
-
-## 🔄 Navigation
-
-To switch between pages, hide/show the relevant sections:
-- **Meals Page**: Show `#search-filters-section`, `#meal-categories-section`, `#all-recipes-section`
-- **Product Scanner**: Show `#products-section`
-- **Food Log**: Show `#foodlog-section`
+Then open the served URL (e.g., `http://localhost:3000`) in your browser.
